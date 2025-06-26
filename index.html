@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday !</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Hide all pages initially */
+        .page {
+            display: none;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            transition: opacity 1s ease-in-out;
+        }
+        .page.active {
+            display: flex;
+            opacity: 1;
+        }
+        /* Animated Cake */
+        .cake {
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        /* Confetti Animation */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff0;
+            animation: fall 3s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="overflow-hidden">
+    <!-- Page 1: Welcome -->
+    <div id="page1" class="page active flex-col">
+        <h1 class="text-5xl font-bold text-pink-600 mb-6">Hey !</h1>
+        <p class="text-2xl text-gray-800 mb-8">I have a special birthday surprise for you!</p>
+        <button onclick="showPage(2)" class="bg-pink-500 text-white px-6 py-3 rounded-lg hover:bg-pink-600 transition">Start</button>
+    </div>
+
+    <!-- Page 2: Birthday Wish with Animated Cake -->
+    <div id="page2" class="page flex-col">
+        <h1 class="text-5xl font-bold text-pink-600 mb-6">Happy Birthday!🎉Miss Chandra Kalla</h1>
+        <p class="text-2xl text-gray-800 mb-8">Wishing you a day full of joy and laughter!</p>
+        <div class="cake text-9xl">🎂</div>
+        <button onclick="showPage(3)" class="mt-8 bg-pink-500 text-white px-6 py-3 rounded-lg hover:bg-pink-600 transition">Next Surprise</button>
+    </div>
+
+    <!-- Page 3: Surprise with Confetti -->
+    <div id="page3" class="page flex-col relative">
+        <h1 class="text-5xl font-bold text-pink-600 mb-6">Surprise! 🎁</h1>
+        <p class="text-2xl text-gray-800 mb-8">You're the best! Let's celebrate YOU!</p>
+        <button onclick="showPage(4)" class="mt-8 bg-pink-500 text-white px-6 py-3 rounded-lg hover:bg-pink-600 transition">Final Message</button>
+        <!-- Confetti -->
+        <script>
+            for (let i = 0; i < 50; i++) {
+                let confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                document.getElementById('page3').appendChild(confetti);
+            }
+        </script>
+    </div>
+
+    <!-- Page 4: Final Message -->
+    <div id="page4" class="page flex-col">
+        <h1 class="text-5xl font-bold text-pink-600 mb-6">Have an Amazing Year Ahead!</h1>
+        <p class="text-2xl text-gray-800 mb-8">Wishes from, Biswajit</p>
+        <div class="text-6xl">🎈🎈🎈</div>
+    </div>
+
+    <script>
+        function showPage(pageNumber) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            // Show the selected page
+            document.getElementById(`page${pageNumber}`).classList.add('active');
+        }
+    </script>
+</body>
+</html>
